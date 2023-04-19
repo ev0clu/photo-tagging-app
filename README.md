@@ -14,8 +14,10 @@ A photo tagging app has built based on the [Where's Waldo?](https://en.wikipedia
 - [React](https://react.dev/)
 - [React Icons](https://www.npmjs.com/package/react-icons)
 - [React Router DOM](https://www.npmjs.com/package/react-router-dom)
+- [Typescript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/)
 - [Firebase](https://firebase.google.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ### Layout
 
