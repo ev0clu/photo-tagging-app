@@ -39,39 +39,60 @@ const Header = ({ isGamePage }: HeaderProps) => {
     }
   ]);
 
+  const [second, setSecond] = useState<number>(0);
+  const [minute, setMinute] = useState<number>(0);
+
   useEffect(() => {
     if (isGamePage) {
       setImages(ImportedImages());
     }
   }, []);
 
+  useEffect(() => {
+    let timer: number = 0;
+    if (second < 60) {
+      timer = setInterval(() => setSecond(second + 1), 1000);
+    }
+    if (second === 60) {
+      setSecond(0);
+      setMinute(minute + 1);
+    }
+    return () => clearInterval(timer);
+  }, [second]);
+
   return (
-    <header>
+    <header className="shadow-custom-1">
       {!isGamePage ? (
-        <div className="flex flex-row items-center justify-center gap-5 text-5xl">
+        <div className="flex h-24 flex-row items-center justify-center gap-5 px-4 py-4 text-5xl">
           <h1 className=" text-sky-500">Where's</h1>
           <h1 className=" text-red-600">Waldo?</h1>
         </div>
       ) : (
-        <div className="flex h-24 flex-row items-center px-12 py-4">
-          <div className="flex flex-row items-center justify-center gap-5 text-5xl">
+        <div className="flex h-24 flex-row items-center justify-between px-4 py-4">
+          <div className="flex w-96 flex-row items-center justify-center gap-5 text-5xl">
             <h1 className=" text-sky-500">Where's</h1>
             <h1 className=" text-red-600">Waldo?</h1>
           </div>
-          <div className="text-2xl">00:03</div>
-          <div className="flex h-full flex-row items-center justify-center gap-5">
+          <div className="w-96 text-center text-2xl">
+            {minute}:
+            {second.toLocaleString('en-US', {
+              minimumIntegerDigits: 2,
+              useGrouping: false
+            })}
+          </div>
+          <div className="flex h-full w-96 flex-row items-center justify-center gap-5">
             <img
-              className="h-full w-full"
+              className="h-full w-auto"
               src={images[0].characters.waldoSrc}
               alt="waldo"
             />
             <img
-              className="h-full w-full"
+              className="h-full w-auto"
               src={images[0].characters.odlawSrc}
               alt="odlaw"
             />
             <img
-              className="h-full w-full"
+              className="h-full w-auto"
               src={images[0].characters.wizardSrc}
               alt="wizard"
             />
