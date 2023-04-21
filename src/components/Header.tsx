@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import ImportedImages from './others/Images';
 
@@ -23,7 +24,7 @@ interface ImportedImagesObject {
   gameboard: GameboardImages;
 }
 
-const Header = ({ isGamePage }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ isGamePage }) => {
   const [images, setImages] = useState<ImportedImagesObject[]>([
     {
       characters: {
@@ -63,16 +64,20 @@ const Header = ({ isGamePage }: HeaderProps) => {
   return (
     <header className="shadow-custom-1">
       {!isGamePage ? (
-        <div className="flex h-24 flex-row items-center justify-center gap-5 px-4 py-4 text-5xl">
-          <h1 className=" text-sky-500">Where's</h1>
-          <h1 className=" text-red-600">Waldo?</h1>
-        </div>
-      ) : (
-        <div className="flex h-24 flex-row items-center justify-between px-4 py-4">
-          <div className="flex w-96 flex-row items-center justify-center gap-5 text-5xl">
+        <Link to="/">
+          <div className="flex h-24 cursor-pointer flex-row items-center justify-center gap-5 px-4 py-4 text-5xl">
             <h1 className=" text-sky-500">Where's</h1>
             <h1 className=" text-red-600">Waldo?</h1>
           </div>
+        </Link>
+      ) : (
+        <div className="flex h-24 flex-row items-center justify-between px-4 py-4">
+          <Link to="/">
+            <div className="flex w-96 cursor-pointer flex-row items-center justify-center gap-5 text-5xl">
+              <h1 className=" text-sky-500">Where's</h1>
+              <h1 className=" text-red-600">Waldo?</h1>
+            </div>
+          </Link>
           <div className="w-96 text-center text-2xl">
             {minute}:
             {second.toLocaleString('en-US', {
