@@ -2,7 +2,12 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'lilita-one': ['"Lilita One"', 'cursive'],
+        'roboto-sans': ['"Roboto"', 'sans-serif']
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };
