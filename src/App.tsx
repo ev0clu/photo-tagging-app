@@ -1,14 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { HashRouter } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import ScrollToTop from './components/ScrollToTop';
 
-import Home from './components/homepage/Homepage';
-import Game from './components/game/Game';
-import Leaderboard from './pages/Leaderboard';
+import Home from './pages/homepage/Homepage';
+import Game1 from './pages/game/Game1';
+import Game2 from './pages/game/Game2';
+import Game3 from './pages/game/Game3';
+import Leaderboard from './pages/leaderboard/Leaderboard';
 
-const App: React.FC = () => {
+import ImportedCharacters from './components/ImportedCharacters';
+import ImportedGameboards from './components/ImportedGameboards';
+
+const App = () => {
+  const [characters, setCharacters] = useState({
+    waldoSrc: '',
+    odlawSrc: '',
+    wizardSrc: ''
+  });
+
+  const [gameboards, setGameboards] = useState({
+    game_1_src: '',
+    game_2_src: '',
+    game_3_src: ''
+  });
+
+  useEffect(() => {
+    setCharacters(ImportedCharacters());
+    setGameboards(ImportedGameboards());
+  }, []);
+
   /*
   const handleGameStartClick = (
     e: React.MouseEvent<HTMLButtonElement>
@@ -28,8 +49,18 @@ const App: React.FC = () => {
     <HashRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/game" element={<Game />} />
+        <Route
+          path="/"
+          element={
+            <Home characters={characters} gameboards={gameboards} />
+          }
+        />{' '}
+        <Route
+          path="/game1"
+          element={
+            <Game1 characters={characters} gameboards={gameboards} />
+          }
+        />
         <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </HashRouter>

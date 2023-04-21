@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import ImportedImages from '../../ImportedGameboards';
+import ImportedImages from '../../../components/ImportedGameboards';
 
 interface CharacterImages {
   waldoSrc: string;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FaGithub } from 'react-icons/fa';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer className="flex h-8 w-full flex-row items-center justify-center gap-2 font-roboto-sans">
       <p>Copyright © Laszlo Kis 2023</p>
