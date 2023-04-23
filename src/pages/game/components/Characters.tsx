@@ -14,7 +14,7 @@ const Characters = () => {
   }, []);
 
   return (
-    <div className="flex h-full w-96 flex-row items-center justify-center gap-5">
+    <div className="flex h-16 w-96 flex-row items-center justify-center gap-1">
       <img
         className="h-full w-auto"
         src={images.waldoSrc}

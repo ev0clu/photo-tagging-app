@@ -61,6 +61,18 @@ const App = () => {
             <Game1 characters={characters} gameboards={gameboards} />
           }
         />
+        <Route
+          path="/game2"
+          element={
+            <Game2 characters={characters} gameboards={gameboards} />
+          }
+        />
+        <Route
+          path="/game3"
+          element={
+            <Game3 characters={characters} gameboards={gameboards} />
+          }
+        />
         <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </HashRouter>
