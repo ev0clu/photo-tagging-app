@@ -7,7 +7,7 @@ interface Props {
 
 const Header = ({ children }: Props) => {
   return (
-    <header className="z-10 flex flex-row items-center justify-center px-4 py-4 shadow-custom-1">
+    <header className="z-10 flex flex-row items-center justify-center px-4 py-4 font-lilita-one shadow-custom-1">
       <Link to="/">
         <div className="flex h-16 w-96 cursor-pointer flex-row items-center justify-center gap-5 font-lilita-one text-5xl">
           <h1 className=" text-sky-500">Where's</h1>

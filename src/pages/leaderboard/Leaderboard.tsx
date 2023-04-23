@@ -5,7 +5,7 @@ const Leaderboard = () => {
   return (
     <>
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 flex-col px-20 py-8">
         <ul>
           <li>test 1</li>
           <li>test2</li>
