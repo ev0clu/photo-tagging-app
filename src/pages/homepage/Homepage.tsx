@@ -55,7 +55,7 @@ const Home = ({ characters, gameboards }: Props) => {
           <div>Are you a Waldo expert?</div>
           <Link to="/leaderboard">
             <Button
-              className="flex cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-10 py-3 text-white hover:bg-orange-400 hover:shadow-custom-1"
+              className="flex cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-10 py-3 text-white hover:bg-orange-500 hover:opacity-90"
               text="Go to Leaderboard"
             />
           </Link>
