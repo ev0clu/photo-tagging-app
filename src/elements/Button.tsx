@@ -1,16 +1,12 @@
 import React from 'react';
 
-interface ButtonProps {
+interface Props {
   className: string;
   text: string;
-  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  className,
-  text,
-  handleClick
-}) => {
+const Button = ({ className, text, handleClick }: Props) => {
   return (
     <button className={className} onClick={handleClick}>
       {text}

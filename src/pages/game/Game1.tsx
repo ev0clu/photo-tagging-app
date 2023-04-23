@@ -6,11 +6,6 @@ import Characters from './components/Characters';
 import Counter from './components/Counter';
 
 interface Props {
-  characters: {
-    waldoSrc: string;
-    odlawSrc: string;
-    wizardSrc: string;
-  };
   gameboards: {
     game_1_src: string;
     game_2_src: string;
@@ -18,7 +13,7 @@ interface Props {
   };
 }
 
-const Game = ({ characters, gameboards }: Props) => {
+const Game = ({ gameboards }: Props) => {
   return (
     <>
       <Header>

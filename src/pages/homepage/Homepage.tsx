@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
+import GameSelector from './components/GameSelector';
+import Button from '../../elements/Button';
+
 interface Props {
   characters: {
     waldoSrc: string;
@@ -21,102 +24,42 @@ const Home = ({ characters, gameboards }: Props) => {
   return (
     <>
       <Header />
-      <main className="flex-1 px-4 py-10">
+      <main className="flex flex-1 flex-col gap-20 px-20 py-10">
         <ul className="flex flex-row justify-center gap-7">
           <Link to="/game1">
-            <li className="flex flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105">
-              <img
-                className="h-56 w-auto rounded-2xl"
-                src={gameboards.game_1_src}
-                alt="game-1"
-              />
-              <div className="flex h-14 w-auto flex-row items-center justify-between px-4 py-2">
-                <div className="flex h-full w-auto items-center justify-center text-xl">
-                  Game 1
-                </div>
-                <div className="flex h-full w-auto flex-row gap-2">
-                  <img
-                    className="h-full w-auto"
-                    src={characters.waldoSrc}
-                    alt="waldo"
-                  />
-                  <img
-                    className="h-full w-auto"
-                    src={characters.odlawSrc}
-                    alt="odlaw"
-                  />
-                  <img
-                    className="h-full w-auto"
-                    src={characters.wizardSrc}
-                    alt="wizard"
-                  />
-                </div>
-              </div>
-            </li>
+            <GameSelector
+              src={gameboards.game_1_src}
+              alt={'game-1'}
+              gameName={'Game 1'}
+              characters={characters}
+            />
           </Link>
           <Link to="/game2">
-            <li className="flex flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105">
-              <img
-                className="h-56 w-auto rounded-2xl"
-                src={gameboards.game_2_src}
-                alt="game-2"
-              />
-              <div className="flex h-14 w-auto flex-row items-center justify-between px-4 py-2">
-                <div className="flex h-full w-auto items-center justify-center text-xl">
-                  Game 2
-                </div>
-                <div className="flex h-full w-auto flex-row gap-2">
-                  <img
-                    className="h-full w-auto"
-                    src={characters.waldoSrc}
-                    alt="waldo"
-                  />
-                  <img
-                    className="h-full w-auto"
-                    src={characters.odlawSrc}
-                    alt="odlaw"
-                  />
-                  <img
-                    className="h-full w-auto"
-                    src={characters.wizardSrc}
-                    alt="wizard"
-                  />
-                </div>
-              </div>
-            </li>
+            <GameSelector
+              src={gameboards.game_2_src}
+              alt={'game-2'}
+              gameName={'Game 2'}
+              characters={characters}
+            />
           </Link>
           <Link to="/game3">
-            <li className="flex flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105">
-              <img
-                className="h-56 w-auto rounded-2xl"
-                src={gameboards.game_3_src}
-                alt="game-3"
-              />
-              <div className="flex h-14 w-auto flex-row items-center justify-between px-4 py-2">
-                <div className="flex h-full w-auto items-center justify-center text-xl">
-                  Game 3
-                </div>
-                <div className="flex h-full w-auto flex-row gap-2">
-                  <img
-                    className="h-full w-auto"
-                    src={characters.waldoSrc}
-                    alt="waldo"
-                  />
-                  <img
-                    className="h-full w-auto"
-                    src={characters.odlawSrc}
-                    alt="odlaw"
-                  />
-                  <img
-                    className="h-full w-auto"
-                    src={characters.wizardSrc}
-                    alt="wizard"
-                  />
-                </div>
-              </div>
-            </li>
+            <GameSelector
+              src={gameboards.game_3_src}
+              alt={'game-3'}
+              gameName={'Game 3'}
+              characters={characters}
+            />
           </Link>
         </ul>
+        <div className="flex flex-row items-center justify-between gap-10 rounded-2xl bg-stone-50 px-6 py-8 text-xl shadow-custom-2">
+          <div>Are you a Waldo expert?</div>
+          <Link to="/leaderboard">
+            <Button
+              className="flex cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-10 py-3 text-white hover:bg-orange-400 hover:shadow-custom-1"
+              text="Go to Leaderboard"
+            />
+          </Link>
+        </div>
       </main>
       <Footer />
     </>
