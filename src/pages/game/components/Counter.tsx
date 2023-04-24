@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const Counter: React.FC = () => {
-  const [second, setSecond] = useState<number>(0);
-  const [minute, setMinute] = useState<number>(0);
+const Counter = () => {
+  const [second, setSecond] = useState(0);
+  const [minute, setMinute] = useState(0);
 
   useEffect(() => {
     let timer: number = 0;
