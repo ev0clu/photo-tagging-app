@@ -54,24 +54,18 @@ const App = () => {
           element={
             <Home characters={characters} gameboards={gameboards} />
           }
-        />{' '}
+        />
         <Route
           path="/game1"
-          element={
-            <Game1 characters={characters} gameboards={gameboards} />
-          }
+          element={<Game1 gameboards={gameboards} />}
         />
         <Route
           path="/game2"
-          element={
-            <Game2 characters={characters} gameboards={gameboards} />
-          }
+          element={<Game2 gameboards={gameboards} />}
         />
         <Route
           path="/game3"
-          element={
-            <Game3 characters={characters} gameboards={gameboards} />
-          }
+          element={<Game3 gameboards={gameboards} />}
         />
         <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
