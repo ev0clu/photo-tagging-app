@@ -24,8 +24,8 @@ const Home = ({ characters, gameboards }: Props) => {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col gap-14 px-20 py-8">
-        <ul className="flex flex-row justify-center gap-7">
+      <main className="flex flex-1 flex-col gap-14 px-40 py-14">
+        <ul className="flex flex-row justify-between gap-10">
           <Link to="/game1">
             <GameSelector
               src={gameboards.game_1_src}
