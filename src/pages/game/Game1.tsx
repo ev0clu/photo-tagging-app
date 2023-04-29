@@ -72,7 +72,7 @@ const Game = ({ gameboards }: Props) => {
       }
     }
     return () => clearInterval(timer);
-  }, [second]);
+  }, [second, isGameOver]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!hover && !popup && !isFeedback) {
