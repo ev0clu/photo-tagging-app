@@ -30,21 +30,6 @@ const App = () => {
     setGameboards(ImportedGameboards());
   }, []);
 
-  /*
-  const handleGameStartClick = (
-    e: React.MouseEvent<HTMLButtonElement>
-  ): void => {
-    const index = Number(
-      e.target.parentNode.parentNode.getAttribute('data-index')
-    );
-
-    if (cartItems[index].quantity < 10) {
-      const newQuantity = [...cartItems];
-      newQuantity[index].quantity = newQuantity[index].quantity + 1;
-      setCartItems(newQuantity);
-    }
-  };*/
-
   return (
     <HashRouter>
       <ScrollToTop />
