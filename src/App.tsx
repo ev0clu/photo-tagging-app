@@ -52,7 +52,10 @@ const App = () => {
           path="/game3"
           element={<Game3 gameboards={gameboards} />}
         />
-        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route
+          path="/leaderboard"
+          element={<Leaderboard gameboards={gameboards} />}
+        />
       </Routes>
     </HashRouter>
   );
