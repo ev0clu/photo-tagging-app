@@ -1,35 +1,25 @@
-import { useState, useEffect } from 'react';
+interface Props {
+  characters: { name: string; isFound: boolean; src: string }[];
+}
 
-import ImportedCharacters from '../../../components/ImportedCharacters';
-
-const Characters = () => {
-  const [images, setImages] = useState({
-    waldoSrc: '',
-    odlawSrc: '',
-    wizardSrc: ''
-  });
-
-  useEffect(() => {
-    setImages(ImportedCharacters());
-  }, []);
-
+const Characters = ({ characters }: Props) => {
   return (
     <div className="flex h-16 w-96 flex-row items-center justify-center gap-1">
-      <img
-        className="h-full w-auto"
-        src={images.waldoSrc}
-        alt="waldo"
-      />
-      <img
-        className="h-full w-auto"
-        src={images.odlawSrc}
-        alt="odlaw"
-      />
-      <img
-        className="h-full w-auto"
-        src={images.wizardSrc}
-        alt="wizard"
-      />
+      {characters.map((character, index) => {
+        const notFound = 'h-full w-auto';
+        const found = 'opacity-30';
+        const className = character.isFound
+          ? `${notFound} ${found}`
+          : `${notFound}`;
+        return (
+          <img
+            className={className}
+            src={character.src}
+            alt={character.name}
+            key={index}
+          />
+        );
+      })}
     </div>
   );
 };
