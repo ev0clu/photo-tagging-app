@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '../../../elements/Button';
 import Input from '../../../elements/Input';
 
-interface GameoverModalProps {
+interface Props {
   minute: number;
   second: number;
+  submitScore: Function;
 }
 
-interface PlayerProps {
-  inputValue: string;
-  minute: number;
-  second: number;
-}
-
-const GameoverModal = ({ minute, second }: GameoverModalProps) => {
+const GameoverModal = ({ minute, second, submitScore }: Props) => {
   const [inputValue, setInputValue] = useState('');
-  const [player, setPlayer] = useState<PlayerProps[]>([]);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const playerArray = player.map((element) => {
-      return element;
-    });
-    playerArray.push({ inputValue, minute, second });
-
-    setPlayer(playerArray);
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (inputValue) {
+      await submitScore(inputValue);
+      navigate('/leaderboard');
+    }
   };
 
   return (

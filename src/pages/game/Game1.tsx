@@ -18,6 +18,12 @@ interface Props {
   };
 }
 
+interface PlayerProps {
+  name: string;
+  minute: number;
+  second: number;
+}
+
 const Game = ({ gameboards }: Props) => {
   const [mousePositionX, setMousePositionX] = useState(0);
   const [mousePositionY, setMousePositionY] = useState(0);
@@ -44,6 +50,7 @@ const Game = ({ gameboards }: Props) => {
     { name: 'Odlaw', x: 610, y: 787 },
     { name: 'Wizard', x: 133, y: 915 }
   ]);
+  const [player, setPlayer] = useState<PlayerProps[]>([]);
 
   useEffect(() => {
     const importedCharacters = ImportedCharacters();
@@ -140,6 +147,15 @@ const Game = ({ gameboards }: Props) => {
     }
   };
 
+  const submitScore = (name: string) => {
+    const playerArray = player.map((element) => {
+      return element;
+    });
+    playerArray.push({ name, minute, second });
+
+    setPlayer(playerArray);
+  };
+
   return (
     <>
       <Header>
@@ -186,7 +202,11 @@ const Game = ({ gameboards }: Props) => {
           ''
         )}{' '}
         {isGameOver ? (
-          <GameoverModal minute={minute} second={second} />
+          <GameoverModal
+            minute={minute}
+            second={second}
+            submitScore={submitScore}
+          />
         ) : (
           ''
         )}
