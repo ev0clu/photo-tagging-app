@@ -3,7 +3,7 @@ import React from 'react';
 interface Props {
   className: string;
   text: string;
-  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (e: React.MouseEvent) => void;
 }
 
 const Button = ({ className, text, handleClick }: Props) => {
