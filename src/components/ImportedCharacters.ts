@@ -8,7 +8,7 @@ interface ImportedImagesObject {
   wizardSrc: string;
 }
 
-const ImportedImages = (): ImportedImagesObject => {
+const ImportedImages: Function = (): ImportedImagesObject => {
   return {
     waldoSrc: waldo,
     odlawSrc: odlaw,

@@ -8,7 +8,7 @@ interface ImportedImagesObject {
   game_3_src: string;
 }
 
-const ImportedImages = (): ImportedImagesObject => {
+const ImportedImages: Function = (): ImportedImagesObject => {
   return {
     game_1_src: game_1,
     game_2_src: game_2,
