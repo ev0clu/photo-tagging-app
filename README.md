@@ -6,8 +6,19 @@ A photo tagging app has built based on the [Where's Waldo?](https://en.wikipedia
 
 ## Features
 
--
--
+- Rendering page based on the route
+- Choose between 3 game boards
+- Custom cursor on game pages
+- Timer shows the elapsed time since the game has started on the header
+- Marked characters which has already found on the header
+- Popup window for choose a character on the board
+  - Rendering only characters are left to find
+  - Different feedback depend on the character is found or not
+- Rendering game over modal once all characters have found
+  - Show the player's score
+  - Submit button adds the score to database, than navigate to the leaderboard page
+- Leaderboard page:
+  - Fetch data from database based on the choosed game board
 
 ### Developement dependencies
 
@@ -25,4 +36,5 @@ A photo tagging app has built based on the [Where's Waldo?](https://en.wikipedia
 
 #### Assets
 
-[]()<br>
+[Where's Waldo gameboard pictures](https://wallpaperaccess.com/wheres-waldo)<br>
+[Where's Waldo character pictures](https://www.giantbomb.com/wheres-waldo/3025-1675/characters/)<br>
