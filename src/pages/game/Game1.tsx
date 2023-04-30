@@ -24,6 +24,10 @@ interface PlayerProps {
   second: number;
 }
 
+interface ImportedCharactersProps {
+  [key: string]: string;
+}
+
 const Game = ({ gameboards }: Props) => {
   const [mousePositionX, setMousePositionX] = useState(0);
   const [mousePositionY, setMousePositionY] = useState(0);
@@ -53,10 +57,11 @@ const Game = ({ gameboards }: Props) => {
   const [player, setPlayer] = useState<PlayerProps[]>([]);
 
   useEffect(() => {
-    const importedCharacters = ImportedCharacters();
+    const importedCharacters: ImportedCharactersProps =
+      ImportedCharacters();
 
-    const newImages = Object.values(importedCharacters).map(
-      (value, index) => {
+    const newImages = Object.entries(importedCharacters).map(
+      ([key, value], index) => {
         return {
           name: characters[index].name,
           isFound: characters[index].isFound,
@@ -68,17 +73,17 @@ const Game = ({ gameboards }: Props) => {
   }, []);
 
   useEffect(() => {
-    let timer: number = 0;
+    let time: NodeJS.Timer;
     if (!isGameOver) {
       if (second < 60) {
-        timer = setInterval(() => setSecond(second + 1), 1000);
+        time = setInterval(() => setSecond(second + 1), 1000);
       }
       if (second === 60) {
         setSecond(0);
         setMinute(minute + 1);
       }
     }
-    return () => clearInterval(timer);
+    return () => clearInterval(time);
   }, [second, isGameOver]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
