@@ -29,7 +29,7 @@ const Home = ({ characters, gameboards }: Props) => {
             <GameSelector
               src={gameboards.game_1_src}
               alt={'game-1'}
-              gameName={'Game 1'}
+              gameName={'Mountain'}
               characters={characters}
             />
           </Link>
@@ -37,7 +37,7 @@ const Home = ({ characters, gameboards }: Props) => {
             <GameSelector
               src={gameboards.game_2_src}
               alt={'game-2'}
-              gameName={'Game 2'}
+              gameName={'Beach'}
               characters={characters}
             />
           </Link>
@@ -45,7 +45,7 @@ const Home = ({ characters, gameboards }: Props) => {
             <GameSelector
               src={gameboards.game_3_src}
               alt={'game-3'}
-              gameName={'Game 3'}
+              gameName={'Space'}
               characters={characters}
             />
           </Link>
