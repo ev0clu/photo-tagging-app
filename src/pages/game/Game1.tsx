@@ -1,5 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
+import database from '../../components/firebase-config';
+import {
+  Firestore,
+  getFirestore,
+  collection,
+  getDocs,
+  deleteDoc,
+  query,
+  where,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+  doc
+} from 'firebase/firestore';
+
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Characters from './components/Characters';
@@ -152,13 +167,27 @@ const Game = ({ gameboards }: Props) => {
     }
   };
 
-  const submitScore = (name: string) => {
-    const playerArray = player.map((element) => {
-      return element;
-    });
-    playerArray.push({ name, minute, second });
+  const submitScore = async (name: string) => {
+    // Add a new entry to the Firebase database.
+    try {
+      await setDoc(doc(database, 'leaderboard', name), {
+        minute: minute,
+        second: second
+      });
+    } catch (error) {
+      console.error(
+        'Error writing new data to Firebase Database',
+        error
+      );
+    }
+  };
 
-    setPlayer(playerArray);
+  const getLeaderboard = async (db: Firestore) => {
+    const scoreCollection = collection(db, `leaderboard`);
+    const scoreSnapshot = await getDocs(scoreCollection);
+    const scoreList = scoreSnapshot.docs.map((doc) => doc.data());
+
+    return scoreList;
   };
 
   return (
