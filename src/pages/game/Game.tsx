@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import database from '../../components/firebase-config';
 import {
@@ -33,17 +34,12 @@ interface Props {
   };
 }
 
-interface PlayerProps {
-  name: string;
-  minute: number;
-  second: number;
-}
-
 interface ImportedCharactersProps {
   [key: string]: string;
 }
 
 const Game = ({ gameboards }: Props) => {
+  const [imgSrc, setImgSrc] = useState('');
   const [mousePositionX, setMousePositionX] = useState(0);
   const [mousePositionY, setMousePositionY] = useState(0);
   const [clickedPositionX, setClickedPositionX] = useState(0);
@@ -64,12 +60,13 @@ const Game = ({ gameboards }: Props) => {
     { name: 'Wizard', isFound: false, src: '' }
   ]);
 
+  const { id } = useParams();
+
   const [x, setX] = useState([
     { name: 'Waldo', x: 1642, y: 879 },
     { name: 'Odlaw', x: 610, y: 787 },
     { name: 'Wizard', x: 133, y: 915 }
   ]);
-  const [player, setPlayer] = useState<PlayerProps[]>([]);
 
   useEffect(() => {
     const importedCharacters: ImportedCharactersProps =
@@ -84,6 +81,7 @@ const Game = ({ gameboards }: Props) => {
         };
       }
     );
+
     setCharacters(newImages);
   }, []);
 
@@ -123,9 +121,13 @@ const Game = ({ gameboards }: Props) => {
     }
   };
 
-  const handlePopupClick = (e: React.MouseEvent) => {
+  const handlePopupClick = async (e: React.MouseEvent) => {
     setPopup(false);
     const choosedCharacterName = e.currentTarget.textContent;
+
+    const test = await getCoordinates(database);
+    console.log(test);
+
     const characterInfo = x.find(
       (element) => element.name === choosedCharacterName
     );
@@ -167,6 +169,14 @@ const Game = ({ gameboards }: Props) => {
     }
   };
 
+  const getCoordinates = async (db: Firestore) => {
+    const coordinateCollection = collection(db, `game-${id}-data`);
+    const scoreSnapshot = await getDocs(coordinateCollection);
+    const scoreList = scoreSnapshot.docs.map((doc) => doc.data());
+
+    return scoreList;
+  };
+
   const submitScore = async (name: string) => {
     // Add a new entry to the Firebase database.
     try {
@@ -196,7 +206,7 @@ const Game = ({ gameboards }: Props) => {
         <Counter minute={minute} second={second} />
         <Characters characters={characters} />
       </Header>
-      <main className="flex-1">
+      <main className="flex flex-1 items-center justify-center">
         {hover ? (
           <CustomCursor
             mousePositionX={mousePositionX}
@@ -210,7 +220,9 @@ const Game = ({ gameboards }: Props) => {
             width: '1920px',
             height: '1080px'
           }}
-          src={gameboards.game_1_src}
+          src={
+            gameboards[`game_${id}_src` as keyof typeof gameboards]
+          }
           alt="game-1"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}

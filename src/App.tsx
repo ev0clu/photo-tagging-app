@@ -4,9 +4,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 
 import Home from './pages/homepage/Homepage';
-import Game1 from './pages/game/Game1';
-import Game2 from './pages/game/Game2';
-import Game3 from './pages/game/Game3';
+import Game from './pages/game/Game';
 import Leaderboard from './pages/leaderboard/Leaderboard';
 
 import ImportedCharacters from './components/ImportedCharacters';
@@ -41,16 +39,8 @@ const App = () => {
           }
         />
         <Route
-          path="/game1"
-          element={<Game1 gameboards={gameboards} />}
-        />
-        <Route
-          path="/game2"
-          element={<Game2 gameboards={gameboards} />}
-        />
-        <Route
-          path="/game3"
-          element={<Game3 gameboards={gameboards} />}
+          path="/game/:id"
+          element={<Game gameboards={gameboards} />}
         />
         <Route
           path="/leaderboard"

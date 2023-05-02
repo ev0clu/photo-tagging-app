@@ -25,7 +25,7 @@ const Home = ({ characters, gameboards }: Props) => {
       <Header />
       <main className="flex flex-1 flex-col gap-14 px-64 py-14">
         <ul className="flex flex-row justify-between gap-10">
-          <Link to="/game1">
+          <Link to="/game/1">
             <GameSelector
               src={gameboards.game_1_src}
               alt={'game-1'}
@@ -33,7 +33,7 @@ const Home = ({ characters, gameboards }: Props) => {
               characters={characters}
             />
           </Link>
-          <Link to="/game2">
+          <Link to="/game/2">
             <GameSelector
               src={gameboards.game_2_src}
               alt={'game-2'}
@@ -41,7 +41,7 @@ const Home = ({ characters, gameboards }: Props) => {
               characters={characters}
             />
           </Link>
-          <Link to="/game3">
+          <Link to="/game/3">
             <GameSelector
               src={gameboards.game_3_src}
               alt={'game-3'}
