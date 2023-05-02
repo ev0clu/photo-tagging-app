@@ -56,7 +56,7 @@ const GameoverModal = ({ minute, second, submitScore }: Props) => {
 
   return (
     <div className="fixed left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-10 rounded-2xl  bg-white px-10 py-10 shadow-custom-1">
-      <div className="flex h-28 flex-col items-center justify-center gap-4">
+      <div className="flex h-28 w-96 flex-col items-center justify-center gap-4">
         {submit ? (
           loading()
         ) : (
