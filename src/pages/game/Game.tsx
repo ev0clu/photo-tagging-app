@@ -9,7 +9,6 @@ import {
   query,
   where,
   setDoc,
-  updateDoc,
   doc
 } from 'firebase/firestore';
 
@@ -124,7 +123,7 @@ const Game = ({ gameboards }: Props) => {
       const characterInfo = characterCoordinates.find(
         (element) => element.name === choosedCharacterName
       );
-      if (characterInfo != undefined) {
+      if (characterInfo !== undefined) {
         if (
           clickedPositionX > characterInfo.x - 24 &&
           clickedPositionX < characterInfo.x + 24 &&
@@ -185,7 +184,8 @@ const Game = ({ gameboards }: Props) => {
   const submitScore = async (name: string) => {
     // Add a new entry to the Firebase database.
     try {
-      await setDoc(doc(database, 'leaderboard', name), {
+      await setDoc(doc(database, `game-${id}-leaderboard`, name), {
+        name: name,
         minute: minute,
         second: second
       });
@@ -197,14 +197,6 @@ const Game = ({ gameboards }: Props) => {
     }
   };
 
-  const getLeaderboard = async (db: Firestore) => {
-    const scoreCollection = collection(db, `leaderboard`);
-    const scoreSnapshot = await getDocs(scoreCollection);
-    const scoreList = scoreSnapshot.docs.map((doc) => doc.data());
-
-    return scoreList;
-  };
-
   return (
     <>
       <Header>
@@ -212,14 +204,6 @@ const Game = ({ gameboards }: Props) => {
         <Characters characters={characters} />
       </Header>
       <main className="flex flex-1 items-center justify-center">
-        {hover ? (
-          <CustomCursor
-            mousePositionX={mousePositionX}
-            mousePositionY={mousePositionY}
-          />
-        ) : (
-          ''
-        )}
         <img
           style={{
             width: '1920px',
@@ -233,6 +217,14 @@ const Game = ({ gameboards }: Props) => {
           onMouseLeave={handleMouseLeave}
           onClick={handleMouseClick}
         />
+        {hover ? (
+          <CustomCursor
+            mousePositionX={mousePositionX}
+            mousePositionY={mousePositionY}
+          />
+        ) : (
+          ''
+        )}
         {isPopup ? (
           <Popup
             clickedPositionX={clickedPositionX}
