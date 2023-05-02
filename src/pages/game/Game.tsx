@@ -4,13 +4,10 @@ import { useParams } from 'react-router-dom';
 import database from '../../components/firebase-config';
 import {
   Firestore,
-  getFirestore,
   collection,
   getDocs,
-  deleteDoc,
   query,
   where,
-  onSnapshot,
   setDoc,
   updateDoc,
   doc
@@ -39,7 +36,6 @@ interface ImportedCharactersProps {
 }
 
 const Game = ({ gameboards }: Props) => {
-  const [imgSrc, setImgSrc] = useState('');
   const [mousePositionX, setMousePositionX] = useState(0);
   const [mousePositionY, setMousePositionY] = useState(0);
   const [clickedPositionX, setClickedPositionX] = useState(0);
@@ -47,7 +43,7 @@ const Game = ({ gameboards }: Props) => {
   const [second, setSecond] = useState(0);
   const [minute, setMinute] = useState(0);
   const [hover, setHover] = useState(false);
-  const [popup, setPopup] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isFeedback, setIsFeedback] = useState(false);
   const [isCharacter, setIsCharacter] = useState({
@@ -61,12 +57,6 @@ const Game = ({ gameboards }: Props) => {
   ]);
 
   const { id } = useParams();
-
-  const [x, setX] = useState([
-    { name: 'Waldo', x: 1642, y: 879 },
-    { name: 'Odlaw', x: 610, y: 787 },
-    { name: 'Wizard', x: 133, y: 915 }
-  ]);
 
   useEffect(() => {
     const importedCharacters: ImportedCharactersProps =
@@ -100,10 +90,10 @@ const Game = ({ gameboards }: Props) => {
   }, [second, isGameOver]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!hover && !popup && !isFeedback) {
+    if (!hover && !isPopup && !isFeedback) {
       setHover(true);
     }
-    if (!popup) {
+    if (!isPopup) {
       setMousePositionX(e.pageX);
       setMousePositionY(e.pageY);
     }
@@ -117,64 +107,79 @@ const Game = ({ gameboards }: Props) => {
     if (!isFeedback) {
       setClickedPositionX(mousePositionX);
       setClickedPositionY(mousePositionY);
-      setPopup(true);
+      setIsPopup(true);
     }
   };
 
   const handlePopupClick = async (e: React.MouseEvent) => {
-    setPopup(false);
     const choosedCharacterName = e.currentTarget.textContent;
+    setIsPopup(false);
 
-    const test = await getCoordinates(database);
-    console.log(test);
+    if (choosedCharacterName !== null) {
+      const characterCoordinates = await getCoordinates(
+        database,
+        choosedCharacterName
+      );
 
-    const characterInfo = x.find(
-      (element) => element.name === choosedCharacterName
-    );
-    if (characterInfo != undefined) {
-      if (
-        clickedPositionX > characterInfo.x - 24 &&
-        clickedPositionX < characterInfo.x + 24 &&
-        clickedPositionY < characterInfo.y + 24 &&
-        clickedPositionY < characterInfo.y + 24
-      ) {
-        const updatedCharacters = characters.map((character) => {
-          if (character.name === characterInfo.name) {
-            setIsCharacter({
-              name: character.name,
-              isFound: true
-            });
-            return { ...character, isFound: true };
-          } else {
-            return character;
+      const characterInfo = characterCoordinates.find(
+        (element) => element.name === choosedCharacterName
+      );
+      if (characterInfo != undefined) {
+        if (
+          clickedPositionX > characterInfo.x - 24 &&
+          clickedPositionX < characterInfo.x + 24 &&
+          clickedPositionY < characterInfo.y + 24 &&
+          clickedPositionY < characterInfo.y + 24
+        ) {
+          const updatedCharacters = characters.map((character) => {
+            if (character.name === characterInfo.name) {
+              setIsCharacter({
+                name: character.name,
+                isFound: true
+              });
+              return { ...character, isFound: true };
+            } else {
+              return character;
+            }
+          });
+          setCharacters(updatedCharacters);
+
+          const allCharactersFound = updatedCharacters.every(
+            (element) => {
+              return element.isFound === true;
+            }
+          );
+          if (allCharactersFound) {
+            setIsGameOver(true);
           }
-        });
-        setCharacters(updatedCharacters);
-
-        const allCharactersFound = updatedCharacters.every(
-          (element) => {
-            return element.isFound === true;
-          }
-        );
-        if (allCharactersFound) {
-          setIsGameOver(true);
         }
-      }
-      setIsFeedback(true);
+        setIsFeedback(true);
 
-      setTimeout(() => {
-        setIsFeedback(false);
-        setIsCharacter({ name: '', isFound: false });
-      }, 1000);
+        setTimeout(() => {
+          setIsFeedback(false);
+          setIsCharacter({ name: '', isFound: false });
+        }, 1000);
+      }
     }
   };
 
-  const getCoordinates = async (db: Firestore) => {
-    const coordinateCollection = collection(db, `game-${id}-data`);
-    const scoreSnapshot = await getDocs(coordinateCollection);
-    const scoreList = scoreSnapshot.docs.map((doc) => doc.data());
+  const getCoordinates = async (
+    db: Firestore,
+    characterName: string
+  ) => {
+    const charactersCollection = collection(db, `game-${id}-data`);
+    const querryCharactersCollection = query(
+      charactersCollection,
+      where('name', '==', characterName)
+    );
+    const charactersSnapshot = await getDocs(
+      querryCharactersCollection
+    );
+    const coordinateList = charactersSnapshot.docs.map((doc) =>
+      doc.data()
+    );
 
-    return scoreList;
+    return coordinateList;
   };
 
   const submitScore = async (name: string) => {
@@ -228,7 +233,7 @@ const Game = ({ gameboards }: Props) => {
           onMouseLeave={handleMouseLeave}
           onClick={handleMouseClick}
         />
-        {popup ? (
+        {isPopup ? (
           <Popup
             clickedPositionX={clickedPositionX}
             clickedPositionY={clickedPositionY}
