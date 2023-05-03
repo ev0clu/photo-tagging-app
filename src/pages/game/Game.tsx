@@ -102,10 +102,10 @@ const Game = ({ gameboards }: Props) => {
     setHover(false);
   };
 
-  const handleMouseClick = () => {
+  const handleMouseClick = (e: React.MouseEvent) => {
     if (!isFeedback) {
-      setClickedPositionX(mousePositionX);
-      setClickedPositionY(mousePositionY);
+      setClickedPositionX(e.nativeEvent.offsetX);
+      setClickedPositionY(e.nativeEvent.offsetY);
       setIsPopup(true);
     }
   };
