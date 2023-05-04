@@ -19,6 +19,7 @@ A photo tagging app has built based on the [Where's Waldo?](https://en.wikipedia
   - Submit button adds the score to database, than navigate to the leaderboard page
 - Leaderboard page:
   - Fetch data from database based on the choosed game board
+  - Sorted scores, 5 scores are shown in each time and it is updated based on the next and previous button pressing
 
 ### Developement dependencies
 
