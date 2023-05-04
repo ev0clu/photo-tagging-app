@@ -14,7 +14,7 @@ const GameSelector = ({ src, alt, gameName, characters }: Props) => {
     <>
       <li className="flex cursor-pointer flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105">
         <img
-          className="h-56 w-auto rounded-t-2xl"
+          className="h-56 w-96 rounded-t-2xl"
           src={src}
           alt={alt}
         />
