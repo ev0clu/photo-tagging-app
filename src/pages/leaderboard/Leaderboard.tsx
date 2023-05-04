@@ -32,39 +32,30 @@ const Leaderboard = ({ gameboards }: Props) => {
   const [isPreviousPage, setIsPreviousPage] = useState(false);
   const [isNextPage, setIsNextPage] = useState(false);
   const [firstIndex, setFirstIndex] = useState(0);
-  const [lastIndex, setLastIndex] = useState(5);
-
-  /*
-  useEffect(() => {
-    if (scoreData.length > 4) {
-      setIsNextPage(true);
-    }
-  }, [scoreData]);*/
+  const [lastIndex, setLastIndex] = useState(4);
 
   useEffect(() => {
     fetchData('1');
   }, []);
 
   useEffect(() => {
-    let list = scoreData
-      .map((data, index) => {
-        if (index < lastIndex) {
-          return data;
-        }
-      })
-      .filter((data) => data !== undefined) as ScoreProps[];
-
-    if (scoreData.length < 5) {
-      list = list.slice(firstIndex, lastIndex + 1);
-    }
-    setScoreList(list);
+    let list = scoreData.map((item) => ({ ...item }));
 
     if (scoreData.length > 5) {
-      setIsNextPage(true);
-    } else {
-      setIsNextPage(false);
+      list = list.slice(firstIndex, lastIndex + 1);
     }
-    return () => setScoreList([]);
+    if (list.length < 5) {
+      setIsNextPage(false);
+    } else {
+      setIsNextPage(true);
+    }
+    if (firstIndex > 0) {
+      setIsPreviousPage(true);
+    } else {
+      setIsPreviousPage(false);
+    }
+
+    setScoreList(list);
   }, [scoreData, firstIndex]);
 
   useEffect(() => {}, []);
@@ -92,7 +83,7 @@ const Leaderboard = ({ gameboards }: Props) => {
     }
     fetchData(gameId);
     setFirstIndex(0);
-    setLastIndex(5);
+    setLastIndex(4);
     setIsPreviousPage(false);
     setIsNextPage(false);
   };
@@ -115,7 +106,11 @@ const Leaderboard = ({ gameboards }: Props) => {
   };
 
   const handlePreviousClick = (e: React.MouseEvent<HTMLElement>) => {
-    setLastIndex(lastIndex + 5);
+    if (lastIndex - 5 > 4) {
+      setLastIndex(lastIndex - 5);
+    } else {
+      setLastIndex(4);
+    }
     if (firstIndex - 5 > 0) {
       setFirstIndex(firstIndex - 5);
     } else {
@@ -125,7 +120,11 @@ const Leaderboard = ({ gameboards }: Props) => {
 
   const handleNextClick = (e: React.MouseEvent<HTMLElement>) => {
     setFirstIndex(firstIndex + 5);
-    if (lastIndex + 5 < scoreData.length) {
+    if (
+      lastIndex + 5 < scoreData.length - 5 ||
+      (lastIndex + 5 > scoreData.length - 5 &&
+        lastIndex < scoreData.length)
+    ) {
       setLastIndex(lastIndex + 5);
     } else {
       setLastIndex(scoreData.length);
@@ -135,7 +134,7 @@ const Leaderboard = ({ gameboards }: Props) => {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col items-center justify-start gap-14 px-64 py-14">
+      <main className="flex flex-1 flex-col items-center justify-start gap-10 px-64 py-14">
         <ul className="flex flex-row justify-between gap-10">
           <LeaderboardSelector
             src={gameboards.game_1_src}
@@ -161,24 +160,35 @@ const Leaderboard = ({ gameboards }: Props) => {
             handleSelectorClick={handleSelectorClick}
           />
         </ul>
-        <ul className="flex flex-col gap-1">
-          {submit ? <Loading /> : <ScoreList scoreList={scoreList} />}
+        <ul className="flex h-72 flex-col gap-1">
+          {submit ? (
+            <Loading />
+          ) : (
+            <ScoreList
+              scoreList={scoreList}
+              firstIndex={firstIndex}
+            />
+          )}
         </ul>
         <div className="flex w-96 flex-row justify-between text-xl">
-          {isPreviousPage && (
-            <Button
-              className="flex w-32 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90"
-              text="Previous"
-              handleClick={handlePreviousClick}
-            />
-          )}
-          {isNextPage && (
-            <Button
-              className="flex w-32 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90"
-              text="Next"
-              handleClick={handleNextClick}
-            />
-          )}
+          <div>
+            {isPreviousPage && (
+              <Button
+                className="flex w-32 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90"
+                text="Previous"
+                handleClick={handlePreviousClick}
+              />
+            )}
+          </div>
+          <div>
+            {isNextPage && (
+              <Button
+                className="flex w-32 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90"
+                text="Next"
+                handleClick={handleNextClick}
+              />
+            )}
+          </div>
         </div>
       </main>
       <Footer />

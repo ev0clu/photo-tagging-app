@@ -4,21 +4,22 @@ interface Props {
     minute: number;
     second: number;
   }[];
+  firstIndex: number;
 }
 
-const ScoreList = ({ scoreList }: Props) => {
+const ScoreList = ({ scoreList, firstIndex }: Props) => {
   return (
     <>
       {scoreList.map((data, index) => {
         return (
           <li
             key={`score${index}`}
-            data-index={index}
+            data-index={firstIndex + index}
             className="flex w-96 flex-row justify-between rounded-lg border-4 border-solid border-neutral-200 px-8 py-2 text-lg"
           >
             <div className="flex flex-row gap-3">
               <div className="font-bold">
-                {index + 1}
+                {firstIndex + index + 1}
                 {'.'}
               </div>
               {data.name}
