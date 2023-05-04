@@ -12,9 +12,9 @@ interface Props {
 const GameSelector = ({ src, alt, gameName, characters }: Props) => {
   return (
     <>
-      <li className="flex cursor-pointer flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105">
+      <li className="flex w-56 cursor-pointer flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105 md:w-96">
         <img
-          className="h-56 w-96 rounded-t-2xl"
+          className="h-44 w-auto rounded-t-2xl md:h-56"
           src={src}
           alt={alt}
         />

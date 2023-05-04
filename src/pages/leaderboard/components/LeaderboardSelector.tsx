@@ -20,11 +20,11 @@ const LeaderboardSelector = ({
         onClick={handleSelectorClick}
         className={`${
           selection === gameName ? 'scale-105 shadow-amber-600' : ''
-        } flex cursor-pointer flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105`}
+        } flex w-56 cursor-pointer flex-col gap-1 rounded-2xl shadow-custom-2 transition duration-300 ease-in hover:scale-105 md:w-96`}
         data-game={gameName}
       >
         <img
-          className="h-56 w-auto rounded-t-2xl"
+          className="h-44 w-auto rounded-t-2xl md:h-56"
           src={src}
           alt={alt}
         />

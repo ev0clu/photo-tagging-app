@@ -15,7 +15,7 @@ const ScoreList = ({ scoreList, firstIndex }: Props) => {
           <li
             key={`score${index}`}
             data-index={firstIndex + index}
-            className="flex w-96 flex-row justify-between rounded-lg border-4 border-solid border-neutral-200 px-8 py-2 text-lg"
+            className="flex w-56 flex-row justify-between rounded-lg border-4 border-solid border-neutral-200 px-8 py-2 text-lg md:w-96"
           >
             <div className="flex flex-row gap-3">
               <div className="font-bold">

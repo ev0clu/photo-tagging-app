@@ -89,7 +89,7 @@ const Game = ({ gameboards }: Props) => {
   }, [second, isGameOver]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!hover && !isPopup && !isFeedback) {
+    if (!hover && !isPopup) {
       setHover(true);
     }
     if (!isPopup) {

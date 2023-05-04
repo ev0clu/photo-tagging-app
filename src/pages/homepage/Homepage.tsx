@@ -23,8 +23,8 @@ const Home = ({ characters, gameboards }: Props) => {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col gap-14 px-64 py-14">
-        <ul className="flex flex-row justify-between gap-10">
+      <main className="flex flex-1 flex-col items-center gap-14 px-6 py-14 xl:items-stretch xl:px-64">
+        <ul className="flex flex-col justify-between gap-10 xl:flex-row">
           <Link to="/game/1">
             <GameSelector
               src={gameboards.game_1_src}
@@ -50,11 +50,11 @@ const Home = ({ characters, gameboards }: Props) => {
             />
           </Link>
         </ul>
-        <div className="flex flex-row items-center justify-between gap-10 rounded-2xl bg-stone-50 px-6 py-8 text-xl shadow-custom-2">
-          <div>Are you a Waldo expert?</div>
+        <div className="flex w-56 flex-col items-center justify-between gap-4 rounded-2xl bg-stone-50 px-6 py-8 text-xl shadow-custom-2 md:w-96 md:gap-10 xl:w-auto xl:flex-row">
+          <div className="text-center">Are you a Waldo expert?</div>
           <Link to="/leaderboard">
             <Button
-              className="flex cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-10 py-3 text-white hover:bg-orange-500 hover:opacity-90"
+              className="flex cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-6 py-3 text-white hover:bg-orange-500 hover:opacity-90 md:px-10"
               text="Go to Leaderboard"
             />
           </Link>
