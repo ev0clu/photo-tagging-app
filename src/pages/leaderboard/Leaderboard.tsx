@@ -141,7 +141,7 @@ const Leaderboard = ({ gameboards }: Props) => {
   return (
     <>
       <Header />
-      <main className="flex flex-1 flex-col items-center justify-start gap-10 px-6 py-14 xl:px-64">
+      <main className="flex flex-1 flex-col items-center justify-start gap-14 px-6 py-14 xl:items-stretch xl:px-64">
         <ul className="flex flex-col justify-between gap-10 xl:flex-row">
           <LeaderboardSelector
             src={gameboards.game_1_src}
@@ -167,7 +167,7 @@ const Leaderboard = ({ gameboards }: Props) => {
             handleSelectorClick={handleSelectorClick}
           />
         </ul>
-        <ul className="flex h-72 flex-col gap-1">
+        <ul className="flex h-72 flex-col items-center gap-1">
           {submit ? (
             <Loading />
           ) : (
@@ -177,24 +177,26 @@ const Leaderboard = ({ gameboards }: Props) => {
             />
           )}
         </ul>
-        <div className="flex w-56 flex-row justify-between text-xl md:w-96">
-          <div>
-            {isPreviousPage && (
-              <Button
-                className="flex w-24 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90 md:w-32"
-                text="Previous"
-                handleClick={handlePreviousClick}
-              />
-            )}
-          </div>
-          <div>
-            {isNextPage && (
-              <Button
-                className="flex w-24 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90 md:w-32"
-                text="Next"
-                handleClick={handleNextClick}
-              />
-            )}
+        <div className="flex justify-center">
+          <div className="flex w-56 flex-row justify-between text-xl md:w-96">
+            <div>
+              {isPreviousPage && (
+                <Button
+                  className="flex w-24 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90 md:w-32"
+                  text="Previous"
+                  handleClick={handlePreviousClick}
+                />
+              )}
+            </div>
+            <div>
+              {isNextPage && (
+                <Button
+                  className="flex w-24 cursor-pointer flex-row items-center justify-center rounded-lg border border-solid border-amber-600 bg-amber-500 px-5 py-3 text-white hover:bg-orange-500 hover:opacity-90 md:w-32"
+                  text="Next"
+                  handleClick={handleNextClick}
+                />
+              )}
+            </div>
           </div>
         </div>
       </main>
