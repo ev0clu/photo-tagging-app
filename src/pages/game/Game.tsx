@@ -207,7 +207,8 @@ const Game = ({ gameboards }: Props) => {
         <img
           style={{
             width: '1920px',
-            height: '1080px'
+            height: '1080px',
+            cursor: 'none'
           }}
           src={
             gameboards[`game_${id}_src` as keyof typeof gameboards]
