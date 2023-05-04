@@ -91,6 +91,13 @@ const Leaderboard = ({ gameboards }: Props) => {
   const fetchData = async (id: string) => {
     setSubmit(true);
     const data = await getLeaderboard(database, id);
+    data.sort((a, b) => {
+      if (a.minute === b.minute) {
+        return a.second - b.second;
+      } else {
+        return a.minute - b.minute;
+      }
+    });
     setScoreData(data);
     setSubmit(false);
   };
