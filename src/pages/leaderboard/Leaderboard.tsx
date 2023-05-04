@@ -112,7 +112,7 @@ const Leaderboard = ({ gameboards }: Props) => {
     return scoreList;
   };
 
-  const handlePreviousClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handlePreviousClick = () => {
     if (lastIndex - 5 > 4) {
       setLastIndex(lastIndex - 5);
     } else {
@@ -125,7 +125,7 @@ const Leaderboard = ({ gameboards }: Props) => {
     }
   };
 
-  const handleNextClick = (e: React.MouseEvent<HTMLElement>) => {
+  const handleNextClick = () => {
     setFirstIndex(firstIndex + 5);
     if (
       lastIndex + 5 < scoreData.length - 5 ||
