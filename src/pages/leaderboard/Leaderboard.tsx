@@ -26,7 +26,6 @@ interface ScoreProps {
 
 const Leaderboard = ({ gameboards }: Props) => {
   const [submit, setSubmit] = useState(false);
-  const [gameSelector, setGameSelector] = useState('1');
   const [selection, setSelection] = useState('Mountain');
   const [scoreData, setScoreData] = useState<ScoreProps[]>([]);
   const [scoreList, setScoreList] = useState<ScoreProps[]>([]);
@@ -35,13 +34,16 @@ const Leaderboard = ({ gameboards }: Props) => {
   const [firstIndex, setFirstIndex] = useState(0);
   const [lastIndex, setLastIndex] = useState(5);
 
-  useEffect(() => {}, [gameSelector]);
   /*
   useEffect(() => {
     if (scoreData.length > 4) {
       setIsNextPage(true);
     }
   }, [scoreData]);*/
+
+  useEffect(() => {
+    fetchData('1');
+  }, []);
 
   useEffect(() => {
     let list = scoreData
