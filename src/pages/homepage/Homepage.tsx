@@ -24,7 +24,7 @@ const Home = ({ characters, gameboards }: Props) => {
     <>
       <Header />
       <main className="mx-auto my-14 flex flex-1 flex-col gap-14">
-        <ul className="flex flex-col justify-between gap-10 xl:flex-row">
+        <ul className="flex flex-col items-center gap-10 xl:flex-row">
           <Link to="/game/1">
             <GameSelector
               src={gameboards.game_1_src}
@@ -50,7 +50,7 @@ const Home = ({ characters, gameboards }: Props) => {
             />
           </Link>
         </ul>
-        <div className="flex flex-col items-center gap-4 rounded-2xl bg-stone-50 px-6 py-4 text-xl shadow-custom-2 md:gap-10  xl:flex-row xl:justify-between">
+        <div className="flex flex-col items-center gap-5 rounded-2xl bg-stone-50 px-6 py-4 text-xl shadow-custom-2 md:gap-10  xl:flex-row xl:justify-between">
           <div className="text-center">Are you a Waldo expert?</div>
           <Link to="/leaderboard">
             <Button

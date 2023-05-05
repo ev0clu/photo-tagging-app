@@ -142,7 +142,7 @@ const Leaderboard = ({ gameboards }: Props) => {
     <>
       <Header />
       <main className="mx-auto my-14 flex flex-1 flex-col gap-14">
-        <ul className="flex flex-col justify-between gap-10 xl:flex-row">
+        <ul className="flex flex-col gap-10 xl:flex-row">
           <LeaderboardSelector
             src={gameboards.game_1_src}
             alt={'game-1-leaderboard'}
@@ -167,10 +167,12 @@ const Leaderboard = ({ gameboards }: Props) => {
             handleSelectorClick={handleSelectorClick}
           />
         </ul>
-        <div className="flex- flex-col gap-5">
-          <ul className="flex h-72 flex-col items-stretch gap-1">
+        <div className="flex flex-col gap-5">
+          <ul className="flex h-72 flex-col items-stretch justify-start gap-1">
             {submit ? (
-              <Loading />
+              <div className="flex h-72 flex-col items-center justify-center">
+                <Loading />
+              </div>
             ) : (
               <ScoreList
                 scoreList={scoreList}
