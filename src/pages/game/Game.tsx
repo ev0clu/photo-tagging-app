@@ -206,6 +206,14 @@ const Game = ({ gameboards }: Props) => {
         <Characters characters={characters} />
       </Header>
       <main className="flex flex-1 items-center justify-center">
+        {hover ? (
+          <CustomCursor
+            mousePositionX={mousePositionX}
+            mousePositionY={mousePositionY}
+          />
+        ) : (
+          ''
+        )}
         <div className="relative">
           <img
             style={{
@@ -231,24 +239,16 @@ const Game = ({ gameboards }: Props) => {
           ) : (
             ''
           )}
+          {isFeedback ? (
+            <Feedback
+              clickedPositionX={clickedPositionX}
+              clickedPositionY={clickedPositionY}
+              isCharacter={isCharacter}
+            />
+          ) : (
+            ''
+          )}
         </div>
-        {hover ? (
-          <CustomCursor
-            mousePositionX={mousePositionX}
-            mousePositionY={mousePositionY}
-          />
-        ) : (
-          ''
-        )}
-        {isFeedback ? (
-          <Feedback
-            clickedPositionX={clickedPositionX}
-            clickedPositionY={clickedPositionY}
-            isCharacter={isCharacter}
-          />
-        ) : (
-          ''
-        )}{' '}
         {isGameOver ? (
           <GameoverModal
             minute={minute}
