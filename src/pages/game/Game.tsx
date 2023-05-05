@@ -103,16 +103,18 @@ const Game = ({ gameboards }: Props) => {
   };
 
   const handleMouseClick = (e: React.MouseEvent) => {
-    if (!isFeedback) {
+    if (!isFeedback && !isPopup) {
       setClickedPositionX(e.nativeEvent.offsetX);
       setClickedPositionY(e.nativeEvent.offsetY);
       setIsPopup(true);
+      setHover(false);
     }
   };
 
   const handlePopupClick = async (e: React.MouseEvent) => {
     const choosedCharacterName = e.currentTarget.textContent;
     setIsPopup(false);
+    setHover(true);
 
     if (choosedCharacterName !== null) {
       const characterCoordinates = await getCoordinates(
@@ -204,34 +206,36 @@ const Game = ({ gameboards }: Props) => {
         <Characters characters={characters} />
       </Header>
       <main className="flex flex-1 items-center justify-center">
-        <img
-          style={{
-            width: '1920px',
-            height: '1080px',
-            cursor: 'none'
-          }}
-          src={
-            gameboards[`game_${id}_src` as keyof typeof gameboards]
-          }
-          alt="game-1"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          onClick={handleMouseClick}
-        />
+        <div className="relative">
+          <img
+            style={{
+              width: '1920px',
+              height: '1080px',
+              cursor: `${!isPopup ? 'none' : 'pointer'}`
+            }}
+            src={
+              gameboards[`game_${id}_src` as keyof typeof gameboards]
+            }
+            alt="game-1"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onClick={handleMouseClick}
+          />
+          {isPopup ? (
+            <Popup
+              clickedPositionX={clickedPositionX}
+              clickedPositionY={clickedPositionY}
+              characters={characters}
+              handleClick={handlePopupClick}
+            />
+          ) : (
+            ''
+          )}
+        </div>
         {hover ? (
           <CustomCursor
             mousePositionX={mousePositionX}
             mousePositionY={mousePositionY}
-          />
-        ) : (
-          ''
-        )}
-        {isPopup ? (
-          <Popup
-            clickedPositionX={clickedPositionX}
-            clickedPositionY={clickedPositionY}
-            characters={characters}
-            handleClick={handlePopupClick}
           />
         ) : (
           ''
