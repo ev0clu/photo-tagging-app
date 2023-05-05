@@ -50,7 +50,7 @@ const Home = ({ characters, gameboards }: Props) => {
             />
           </Link>
         </ul>
-        <div className="flex w-56 flex-col items-center justify-between gap-4 rounded-2xl bg-stone-50 px-6 py-8 text-xl shadow-custom-2 md:w-96 md:gap-10 xl:w-auto xl:flex-row">
+        <div className="flex flex-col items-center gap-4 rounded-2xl bg-stone-50 px-6 py-4 text-xl shadow-custom-2 md:gap-10  xl:flex-row xl:justify-between">
           <div className="text-center">Are you a Waldo expert?</div>
           <Link to="/leaderboard">
             <Button
