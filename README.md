@@ -13,8 +13,8 @@ A photo tagging app has built based on the [Where's Waldo?](https://en.wikipedia
 - Marked characters which has already found on the header
 - Popup window for choose a character on the board
   - Rendering only characters are left to find
-  - Different feedback depend on the character is found or not
-- Rendering game over modal once all characters have found
+  - Different feedback depend on the choose character is found on the given coordinate or not
+- Rendering game over modal once all characters have been found
   - Show the player's score
   - Submit button adds the score to database, than navigate to the leaderboard page
 - Leaderboard page:
